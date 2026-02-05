@@ -1,4 +1,4 @@
-import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 
 import './RotatingText.css';
@@ -7,7 +7,7 @@ function cn(...classes) {
     return classes.filter(Boolean).join(' ');
 }
 
-const RotatingText = forwardRef((props, ref) => {
+const RotatingText = (props) => {
     const {
         texts,
         transition = { type: 'spring', damping: 25, stiffness: 300 },
@@ -100,40 +100,6 @@ const RotatingText = forwardRef((props, ref) => {
         }
     }, [currentTextIndex, texts.length, loop, handleIndexChange]);
 
-    const previous = useCallback(() => {
-        const prevIndex = currentTextIndex === 0 ? (loop ? texts.length - 1 : currentTextIndex) : currentTextIndex - 1;
-        if (prevIndex !== currentTextIndex) {
-            handleIndexChange(prevIndex);
-        }
-    }, [currentTextIndex, texts.length, loop, handleIndexChange]);
-
-    const jumpTo = useCallback(
-        index => {
-            const validIndex = Math.max(0, Math.min(index, texts.length - 1));
-            if (validIndex !== currentTextIndex) {
-                handleIndexChange(validIndex);
-            }
-        },
-        [texts.length, currentTextIndex, handleIndexChange]
-    );
-
-    const reset = useCallback(() => {
-        if (currentTextIndex !== 0) {
-            handleIndexChange(0);
-        }
-    }, [currentTextIndex, handleIndexChange]);
-
-    useImperativeHandle(
-        ref,
-        () => ({
-            next,
-            previous,
-            jumpTo,
-            reset
-        }),
-        [next, previous, jumpTo, reset]
-    );
-
     useEffect(() => {
         if (!auto) return;
         const intervalId = setInterval(next, rotationInterval);
@@ -180,7 +146,6 @@ const RotatingText = forwardRef((props, ref) => {
             </AnimatePresence>
         </motion.span>
     );
-});
+};
 
-RotatingText.displayName = 'RotatingText';
 export default RotatingText;

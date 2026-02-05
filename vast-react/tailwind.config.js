@@ -28,14 +28,9 @@ export default {
                     '0%': { transform: 'translateX(0)' },
                     '100%': { transform: 'translateX(-50%)' },
                 },
-                fadeInUp: {
-                    '0%': { opacity: '0', transform: 'translateY(30px)' },
-                    '100%': { opacity: '1', transform: 'translateY(0)' },
-                }
             },
             animation: {
                 marquee: 'marquee 25s linear infinite',
-                fadeInUp: 'fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
             }
         },
     },

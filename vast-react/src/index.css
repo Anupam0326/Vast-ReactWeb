@@ -38,11 +38,7 @@ body {
   max-width: 1200px;
 }
 
-/* Custom Utilities */
-.logo-dark-mode,
-.logo-light-mode {
-  transition: opacity 0.4s ease;
-}
+
 
 /* Marquee Animation */
 @keyframes marquee {

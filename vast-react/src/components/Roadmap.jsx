@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useEffect } from 'react';
+import { useLayoutEffect, useRef, useEffect, useState } from 'react';
 import { Target, Clapperboard, MonitorPlay, Zap } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -134,7 +134,7 @@ const Roadmap = () => {
         return () => clearTimeout(timer);
     }, []);
 
-    const [isMobile, setIsMobile] = React.useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
     useLayoutEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);

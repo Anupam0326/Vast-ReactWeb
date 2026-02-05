@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Sun, Moon, ArrowRight } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Sun, Moon } from 'lucide-react';
 import './BrutalistButton.css';
 
 const Navbar = () => {

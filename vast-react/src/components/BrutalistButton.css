@@ -13,7 +13,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--btn-border);
     /* Slight curve border as requested */
     border-radius: 9999px;
     /* Pill shape for "slight curve" (user said slight curve, usually means rounded corners or pill) - "slight curve" might mean small radius. Let's start with 12px for "slight". */
@@ -38,7 +38,7 @@
     height: 0;
     border-width: 0 var(--plus_topRightTriangleSideLength) var(--plus_topRightTriangleSideLength) 0;
     border-style: solid;
-    border-color: transparent white transparent transparent;
+    border-color: transparent var(--text) transparent transparent;
     transition-timing-function: ease-in-out;
     transition-duration: 0.2s;
     z-index: 2;
@@ -48,7 +48,7 @@
 
 .plusButton:hover {
     cursor: pointer;
-    border-color: white;
+    border-color: var(--text);
 }
 
 .plusButton:hover::before {
@@ -64,7 +64,7 @@
 }
 
 .button-text {
-    color: white;
+    color: var(--text);
     z-index: 3;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
@@ -76,12 +76,12 @@
 }
 
 .plusButton:hover .button-text {
-    color: black;
+    color: var(--bg);
     transition-delay: 0.1s;
 }
 
 .plusButton:focus-visible .button-text {
-    color: black;
+    color: var(--bg);
 }
 
 @media (max-width: 768px) {
