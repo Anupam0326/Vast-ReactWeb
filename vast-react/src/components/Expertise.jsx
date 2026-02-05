@@ -44,7 +44,8 @@ const Expertise = () => {
             img: "/assets/vartika.jpeg",
             tags: ["AESTHETICS", "PRESENCE", "STYLE"],
             links: [
-                { type: "insta", url: "https://www.instagram.com/__vartika_" }
+                { type: "insta", url: "https://www.instagram.com/__vartika_" },
+                { type: "yt", url: "https://www.youtube.com/@veevlogs_byvartika" }
             ],
             pos: "center 30%"
         },
