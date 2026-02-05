@@ -1,0 +1,873 @@
+/* --- 1. FLUID THEME VARIABLES --- */
+:root {
+    /* Colors */
+    --bg: #0b0b0b;
+    --surface: #141414;
+    --text: #ffffff;
+    --text-muted: #888888;
+    --border: rgba(255, 255, 255, 0.1);
+    --pill-bg: rgba(255, 255, 255, 0.1);
+    --btn-border: rgba(255, 255, 255, 0.3);
+    --highlight: #ffffff;
+
+    /* FLUID SPACING SYSTEM */
+    --space-sm: clamp(10px, 2vw, 15px);
+    --space-md: clamp(20px, 4vw, 40px);
+    --space-lg: clamp(60px, 8vw, 140px);
+
+    /* FLUID TYPOGRAPHY */
+    --font-hero: clamp(2.8rem, 6vw, 5.5rem);
+    --font-h2: clamp(2rem, 4vw, 3rem);
+    --font-h3: clamp(1.2rem, 2.5vw, 1.8rem);
+    --font-body: clamp(0.9rem, 1.5vw, 1rem);
+}
+
+/* Light Mode Overrides */
+body.light-mode {
+    --bg: #ffffff;
+    --surface: #f4f4f5;
+    --text: #111111;
+    --text-muted: #555555;
+    --border: rgba(0, 0, 0, 0.1);
+    --pill-bg: rgba(0, 0, 0, 0.05);
+    --btn-border: rgba(0, 0, 0, 0.25);
+    --highlight: #000000;
+}
+
+/* --- RESET & BASICS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    font-size: var(--font-body);
+    overflow-x: hidden;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* --- FLUID CONTAINER --- */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+.text-muted {
+    color: var(--text-muted);
+}
+
+/* --- NAVIGATION --- */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: var(--space-sm) 0;
+    backdrop-filter: blur(10px);
+    background: transparent;
+    border-bottom: 1px solid var(--border);
+}
+
+.menu {
+    display: flex;
+    gap: 25px;
+    /* Forces a clear 25px space between the buttons */
+    align-items: center;
+    font-weight: 500;
+    flex-shrink: 0;
+    /* Prevents the menu from collapsing/overlapping if space is tight */
+}
+
+.nav-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* --- LOGO CONTAINER & SWAPPING LOGIC --- */
+/* --- LOGO CONTAINER & SWAPPING LOGIC --- */
+.logo {
+    position: relative;
+
+    /* INCREASED SIZE FOR VISIBILITY */
+    /* Width: Adjusts automatically to keep the aspect ratio */
+    width: clamp(160px, 20vw, 240px);
+
+    /* Height: Increased to 60px (mobile) -> 90px (desktop) */
+    height: clamp(60px, 8vw, 90px);
+
+    display: flex;
+    align-items: center;
+    /* Optional: Negative margin to remove extra whitespace if the PNG has padding */
+    margin-left: -10px;
+}
+
+.logo img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Ensures the logo scales without stretching */
+    transition: opacity 0.4s ease;
+    /* Smooth cross-fade transition */
+}
+
+/* --- THEME SWAPPING LOGIC --- */
+
+/* 1. DEFAULT (Dark Mode) */
+/* Show White Text (vastanublack.png), Hide Black Text */
+.logo-dark-mode {
+    opacity: 1;
+    z-index: 2;
+}
+
+.logo-light-mode {
+    opacity: 0;
+    z-index: 1;
+}
+
+/* 2. LIGHT MODE */
+/* When body has class 'light-mode', swap them */
+body.light-mode .logo-dark-mode {
+    opacity: 0;
+}
+
+body.light-mode .logo-light-mode {
+    opacity: 1;
+}
+
+/* Theme Button */
+.theme-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    transition: transform 0.3s ease;
+    width: 30px;
+    height: 30px;
+}
+
+.theme-btn:hover {
+    background: var(--pill-bg);
+    transform: rotate(15deg);
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.icon.sun {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+}
+
+.icon.moon {
+    opacity: 0;
+    transform: scale(0) rotate(-90deg);
+}
+
+body.light-mode .icon.sun {
+    opacity: 0;
+    transform: scale(0) rotate(90deg);
+}
+
+body.light-mode .icon.moon {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+}
+
+/* Vantor Button */
+.vantor-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px var(--space-md);
+    border-radius: 50px;
+    background: var(--pill-bg);
+    border: 1px solid var(--btn-border);
+    color: var(--text) !important;
+    font-weight: 500;
+    font-size: 0.9rem;
+    overflow: hidden;
+    transition: all 0.4s;
+}
+
+.vantor-btn:hover {
+    background: var(--text);
+    border-color: var(--text);
+    color: var(--bg) !important;
+    transform: scale(1.02);
+}
+
+.btn-icon {
+    display: flex;
+    width: 18px;
+    height: 18px;
+    transition: transform 0.4s;
+}
+
+.vantor-btn:hover .btn-icon {
+    transform: translate(2px, -2px) rotate(45deg);
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+}
+
+.hero h1 {
+    font-size: var(--font-hero);
+    line-height: 1.1;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.hero p {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    color: var(--text-muted);
+    max-width: 600px;
+    font-weight: 300;
+}
+
+.highlight {
+    color: var(--highlight);
+    border-bottom: 2px solid var(--highlight);
+}
+
+/* --- MARQUEE --- */
+.marquee-wrapper {
+    background: var(--surface);
+    padding: var(--space-sm) 0;
+    overflow: hidden;
+    white-space: nowrap;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.marquee-content {
+    display: inline-block;
+    animation: marquee 25s linear infinite;
+    font-weight: 700;
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+.marquee-content span {
+    margin: 0 var(--space-md);
+    color: var(--text);
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* --- SERVICES & CARDS --- */
+#expertise {
+    padding: var(--space-lg) 0;
+}
+
+.section-header {
+    margin-bottom: var(--space-lg);
+}
+
+.section-header h2 {
+    font-size: var(--font-h2);
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+.cinematic-heading {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin: 0;
+    line-height: 1.1;
+}
+
+/* Responsive Grid Engine */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-md);
+    justify-content: center;
+}
+
+/* Cinematic Card */
+.card.cinematic {
+    position: relative;
+    height: clamp(500px, 70vh, 660px);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    transform: translateZ(0);
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    mask-image: radial-gradient(white, black);
+    transition: transform 0.4s ease;
+}
+
+.card.cinematic:hover {
+    transform: translateY(-10px);
+}
+
+/* Images */
+.img-1 {
+    background-image: url('assets/tanishq.jpg');
+    background-position: center 20%;
+}
+
+.img-2 {
+    background-image: url('assets/sumit.jpeg');
+    background-position: center center;
+}
+
+.img-3 {
+    background-image: url('assets/vartika.jpeg');
+    background-position: center 30%;
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0.95) 100%);
+    z-index: 1;
+}
+
+.cinematic .card-info {
+    position: relative;
+    z-index: 2;
+    padding: var(--space-md);
+}
+
+/* Badges & Text */
+.member-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    padding: 8px 16px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.member-badge:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.cinematic .member-name {
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.member-insta {
+    color: #fff;
+    display: flex;
+    transition: transform 0.3s;
+}
+
+.member-insta:hover {
+    transform: scale(1.1);
+    color: #fff;
+}
+
+.cinematic h3 {
+    color: #fff;
+    font-size: var(--font-h3);
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.cinematic p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: var(--font-body);
+}
+
+.tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.pill {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- FOOTER --- */
+footer {
+    padding: var(--space-lg) 0 var(--space-md);
+    text-align: center;
+}
+
+footer h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+}
+
+.footer-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    margin-bottom: 60px;
+    color: var(--text-muted);
+}
+
+.huge-link {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 60px;
+    transition: opacity 0.3s;
+    word-wrap: break-word;
+}
+
+.huge-link:hover {
+    opacity: 0.7;
+}
+
+/* Magnetic Buttons */
+.social-grid {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.magnetic-btn {
+    position: relative;
+    display: inline-block;
+    padding: 15px 35px;
+    border: 1px solid var(--btn-border);
+    border-radius: 50px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 1rem;
+    background: transparent;
+    transition: border-color 0.3s;
+}
+
+.magnetic-btn .btn-text {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+    transition: color 0.3s;
+}
+
+.magnetic-btn .fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--text);
+    z-index: 1;
+    transform: translate(0, 100%);
+    transition: transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.magnetic-btn:hover {
+    border-color: var(--text);
+}
+
+.magnetic-btn:hover .btn-text {
+    color: var(--bg);
+}
+
+.magnetic-btn.in-top .fill {
+    transform: translate(0, -100%);
+    transition: none;
+}
+
+.magnetic-btn.in-right .fill {
+    transform: translate(100%, 0);
+    transition: none;
+}
+
+.magnetic-btn.in-bottom .fill {
+    transform: translate(0, 100%);
+    transition: none;
+}
+
+.magnetic-btn.in-left .fill {
+    transform: translate(-100%, 0);
+    transition: none;
+}
+
+.magnetic-btn.hover .fill {
+    transform: translate(0, 0) !important;
+    transition: transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+/* Animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s forwards cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.delay-2 {
+    animation-delay: 0.4s;
+}
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- MOBILE OVERRIDES --- */
+@media (max-width: 768px) {
+
+    /* Simplified Button for Mobile */
+    .vantor-btn .btn-text {
+        display: none;
+    }
+
+    .vantor-btn {
+        padding: 8px;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        justify-content: center;
+    }
+
+    .vantor-btn .btn-icon {
+        transform: none;
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Disable magnetic effect on touch screens */
+    .magnetic-btn .fill {
+        display: none !important;
+    }
+}
+
+/* Disable the default cross-fade animation */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+/* Ensure the "new" view is on top during the animation */
+::view-transition-new(root) {
+    z-index: 9999;
+}
+
+/* Optional: Make the transition smoother for dark mode specific elements */
+::view-transition-group(root) {
+    animation-duration: 0.5s;
+}
+
+/* --- ROADMAP SECTION --- */
+/* --- ROADMAP SNAKE LAYOUT --- */
+#roadmap {
+    position: relative;
+    padding: var(--space-lg) 0;
+    overflow: hidden;
+}
+
+.roadmap-wrapper {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    /* strict consistent gap */
+}
+
+/* Remove old line */
+.roadmap-line {
+    display: none;
+}
+
+/* Roadmap Items - Wider & Zig-Zag */
+.roadmap-item {
+    position: relative;
+    /* Responsive Widths */
+    width: clamp(280px, 80%, 450px);
+    /* Wider on mobile, fixed cap on desktop */
+    /* Padding removed in favor of flex gap */
+    box-sizing: border-box;
+    z-index: 2;
+    /* Above the lines */
+}
+
+@media (min-width: 768px) {
+    .roadmap-item {
+        width: 45%;
+        /* Return to narrower width for desktop zig-zag */
+        /* padding removed */
+    }
+}
+
+/* Item 1, 3, 5... (Left Aligned) */
+.roadmap-item.left {
+    margin-right: auto;
+    /* Push to Left */
+    padding-right: 60px;
+    /* Space for icon */
+    text-align: right;
+}
+
+/* Item 2, 4, 6... (Right Aligned) */
+.roadmap-item.right {
+    margin-left: auto;
+    /* Push to Right */
+    padding-left: 60px;
+    /* Space for icon */
+    text-align: left;
+}
+
+/* Card Content */
+/* Removed hover effects */
+.roadmap-content {
+    background: var(--pill-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px;
+    position: relative;
+    min-height: 220px;
+    /* Enforce identical height for visual symmetry */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Icons */
+.roadmap-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    /* Thicker border */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    color: var(--text);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s ease;
+}
+
+.roadmap-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+/* Icon Postioning relative to Item */
+.roadmap-item.left .roadmap-icon {
+    right: -30px;
+    /* Half of width */
+}
+
+
+.roadmap-item.right .roadmap-icon {
+    left: -30px;
+}
+
+/* Connecting Lines (Horizontal) */
+.roadmap-content::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 25px;
+    height: 1px;
+    background: var(--border);
+    transition: width 0.3s ease;
+}
+
+.roadmap-item.left .roadmap-content::after {
+    right: -25px;
+}
+
+.roadmap-item.right .roadmap-content::after {
+    left: -25px;
+}
+
+
+
+.roadmap-text h3 {
+    font-size: var(--font-h3);
+    margin-bottom: 5px;
+    color: var(--text);
+    transition: margin-bottom 0.3s ease;
+}
+
+/* Hidden Description Logic - REMOVED (Always visible) */
+.roadmap-text p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 10px;
+}
+
+
+
+.roadmap-content:hover .roadmap-text h3,
+.roadmap-content.expanded .roadmap-text h3 {
+    margin-bottom: 0;
+}
+
+
+
+/* --- SNAKE SVG --- */
+.snake-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    /* Behind content */
+    pointer-events: none;
+}
+
+.snake-path {
+    fill: none;
+    stroke: var(--text-muted);
+    stroke-width: 5px;
+    /* Broader line */
+    stroke-dasharray: 10 10;
+    /* Dashed line initial state */
+    opacity: 0.4;
+    /* Slightly subtler to avoid text conflict */
+}
+
+/* Animations handled by GSAP */
+.roadmap-item {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+/* Initial state for GSAP */
+
+/* --- MOBILE --- */
+@media (max-width: 768px) {
+    .snake-segment {
+        display: none;
+    }
+
+    /* Hide snake on mobile */
+    .roadmap-wrapper {
+        padding-left: 30px;
+    }
+
+    /* Revert to vertical line styling if needed, or just simple stack */
+    .roadmap-wrapper::before {
+        content: '';
+        position: absolute;
+        left: 30px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--border);
+    }
+
+    .roadmap-item {
+        width: 100%;
+        margin: 0 !important;
+        text-align: left !important;
+        padding-left: 50px !important;
+        padding-right: 0 !important;
+        margin-bottom: 30px;
+    }
+
+    .roadmap-item .roadmap-icon {
+        left: -60px !important;
+        right: auto !important;
+    }
+}

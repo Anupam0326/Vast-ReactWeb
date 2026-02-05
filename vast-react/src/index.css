@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+:root {
+  /* Colors - Dark Default */
+  --bg: #0b0b0b;
+  --surface: #141414;
+  --text: #ffffff;
+  --text-muted: #888888;
+  --border: rgba(255, 255, 255, 0.1);
+  --pill-bg: rgba(255, 255, 255, 0.15);
+  --btn-border: rgba(255, 255, 255, 0.3);
+  --highlight: #ffffff;
+}
+
+.light-mode {
+  --bg: #ffffff;
+  --surface: #f4f4f5;
+  --text: #111111;
+  --text-muted: #555555;
+  --border: rgba(0, 0, 0, 0.1);
+  --pill-bg: rgba(0, 0, 0, 0.05);
+  --btn-border: rgba(0, 0, 0, 0.25);
+  --highlight: #000000;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.5s ease, color 0.5s ease;
+  overflow-x: hidden;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+}
+
+/* Container matching original design */
+.container {
+  width: 90%;
+  max-width: 1200px;
+}
+
+/* Custom Utilities */
+.logo-dark-mode,
+.logo-light-mode {
+  transition: opacity 0.4s ease;
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+/* View Transition API */
+::view-transition-group(root) {
+  animation-duration: 0.5s;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(root) {
+  z-index: 9999;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 4px;
+}
