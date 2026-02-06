@@ -74,10 +74,12 @@ const Expertise = () => {
                     {team.map((member, i) => (
                         <div key={i} className="expert-card group relative h-[500px] md:h-[600px] w-full rounded-[20px] border border-white/20 overflow-hidden transition-transform duration-500 hover:-translate-y-2">
                             {/* Background Image */}
-                            <div
-                                className="absolute inset-0 w-full h-full bg-cover bg-no-repeat transition-transform duration-700 group-hover:scale-105"
-                                style={{ backgroundImage: `url(${member.img})`, backgroundPosition: member.pos }}
-                            ></div>
+                            <img
+                                src={member.img}
+                                alt={`${member.name} - ${member.role} at Vast Creative Studios Jabalpur`}
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                style={{ objectPosition: member.pos }}
+                            />
 
                             {/* Overlay */}
                             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black/95"></div>
