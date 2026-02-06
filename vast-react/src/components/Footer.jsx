@@ -2,32 +2,6 @@ import React from 'react';
 
 const Footer = () => {
 
-    // 3D Button Component
-    const ThreeDButton = ({ children, href }) => {
-        return (
-            <a
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                className="group relative w-[140px] h-[50px] inline-block cursor-pointer outline-none select-none"
-                style={{ WebkitTapHighlightColor: 'transparent' }}
-            >
-                {/* Bottom Layer (Depth) */}
-                <div className="absolute top-[10px] left-0 w-full h-full bg-[#d4d4d4] rounded-[26px] border-2 border-black z-0">
-                    <div className="absolute w-[2px] h-[9px] bg-black bottom-0 left-[15%]"></div>
-                    <div className="absolute w-[2px] h-[9px] bg-black bottom-0 left-[85%]"></div>
-                </div>
-
-                {/* Top Layer (Face) */}
-                <div className="relative w-full h-full bg-white rounded-[26px] border-2 border-black flex items-center justify-center font-bold text-black text-base z-10 transition-transform duration-200 group-active:translate-y-[10px] overflow-hidden">
-                    {children}
-                    {/* Shine Effect */}
-                    <div className="absolute top-0 w-[15px] h-full bg-black/10 -skew-x-[30deg] -left-[20px] transition-all duration-500 group-hover:left-[150%]"></div>
-                </div>
-            </a>
-        );
-    };
-
     return (
         <footer id="contact" className="py-20 md:py-32 text-center border-t border-border">
             <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
@@ -52,6 +26,32 @@ const Footer = () => {
 
 
         </footer>
+    );
+};
+
+// 3D Button Component
+const ThreeDButton = ({ children, href }) => {
+    return (
+        <a
+            href={href}
+            target="_blank"
+            rel="noreferrer"
+            className="group relative w-[140px] h-[50px] inline-block cursor-pointer outline-none select-none"
+            style={{ WebkitTapHighlightColor: 'transparent' }}
+        >
+            {/* Bottom Layer (Depth) */}
+            <div className="absolute top-[10px] left-0 w-full h-full bg-[#d4d4d4] rounded-[26px] border-2 border-black z-0">
+                <div className="absolute w-[2px] h-[9px] bg-black bottom-0 left-[15%]"></div>
+                <div className="absolute w-[2px] h-[9px] bg-black bottom-0 left-[85%]"></div>
+            </div>
+
+            {/* Top Layer (Face) */}
+            <div className="relative w-full h-full bg-white rounded-[26px] border-2 border-black flex items-center justify-center font-bold text-black text-base z-10 transition-transform duration-200 group-active:translate-y-[10px] overflow-hidden">
+                {children}
+                {/* Shine Effect */}
+                <div className="absolute top-0 w-[15px] h-full bg-black/10 -skew-x-[30deg] -left-[20px] transition-all duration-500 group-hover:left-[150%]"></div>
+            </div>
+        </a>
     );
 };
 

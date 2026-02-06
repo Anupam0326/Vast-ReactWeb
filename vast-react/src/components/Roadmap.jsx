@@ -80,7 +80,7 @@ const Roadmap = () => {
     useLayoutEffect(() => {
         let ctx = gsap.context(() => {
             // Initial Path Draw
-            const { length } = updatePath();
+            updatePath();
 
             // 1. Animate Beam (Draw and Collaborate)
             gsap.to(beamRef.current, {

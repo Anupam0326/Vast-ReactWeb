@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Sun, Moon } from 'lucide-react';
 import './BrutalistButton.css';
 
 const Navbar = () => {
     // Theme State
-    const [isLight, setIsLight] = useState(false);
-
-    // Initial Theme Check
-    useEffect(() => {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'light') {
-            setIsLight(true);
-            document.body.classList.add('light-mode');
-        } else {
-            setIsLight(false);
-            document.body.classList.remove('light-mode');
+    const [isLight, setIsLight] = useState(() => {
+        if (typeof window !== 'undefined') {
+            const savedTheme = localStorage.getItem('theme');
+            const isLightMode = savedTheme === 'light';
+            if (isLightMode) {
+                document.body.classList.add('light-mode');
+            } else {
+                document.body.classList.remove('light-mode');
+            }
+            return isLightMode;
         }
-    }, []);
+        return false;
+    });
 
     // Toggle Handler
     const toggleTheme = (e) => {
