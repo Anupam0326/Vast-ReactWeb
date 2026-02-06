@@ -8,5 +8,16 @@ export default defineConfig({
     host: 'localhost',
     port: 5173,
     allowedHosts: true
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-helmet-async'],
+          'animation-vendor': ['motion', 'gsap'],
+          'three-vendor': ['three', '@react-three/fiber', 'ogl']
+        }
+      }
+    }
   }
 })
