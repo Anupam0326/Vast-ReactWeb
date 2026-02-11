@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 const SEO = ({ title, description, keywords, type = 'website', image, schema }) => {
     const siteTitle = "Vast Creative Studios";
     const siteUrl = "https://vastcreativestudios.com";
-    const defaultImage = "/og-image.jpg";
+    const defaultImage = "/assets/vastblackwebS.png";
 
     const metaTitle = title ? `${title} | ${siteTitle}` : "Vast Creative Studios | Top Marketing & Web Development Agency in Jabalpur, MP";
     const metaDescription = description || "Premier marketing and promoting agency in Jabalpur, Madhya Pradesh. Specialists in social media marketing, web development, video production, and branding.";
